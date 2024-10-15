@@ -9,13 +9,15 @@ const cors = require('cors');
 const authRoutes = require('./routes/authRoutes');
 const csrfProtection = require('./middleware/csrfMiddleware');
 
+const app = express();
+
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
   max: 100, // Limit each IP to 100 requests per windowMs
 });
 app.use(limiter);
 
-const app = express();
+
 const store = new ExpressBrute.MemoryStore();
 const bruteforce = new ExpressBrute(store, {
   freeRetries: 5, // Allow 5 attempts before blocking
