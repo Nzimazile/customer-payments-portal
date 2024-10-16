@@ -1,4 +1,4 @@
-const { DataTypes, Sequelize } = require('sequelize');
+const { Sequelize, DataTypes } = require('sequelize');
 const sequelize = require('../config/db');
 
 
@@ -15,8 +15,22 @@ const User = sequelize.define('User', {
   password: {
     type: Sequelize.STRING,
     allowNull: false
+  },
+  createdAt: {
+    type: DataTypes.DATE, // Sequelize manages this automatically
+    allowNull: false,
+    defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
+  },
+  updatedAt: {
+    type: DataTypes.DATE, // Automatically updated on any record update
+    allowNull: false,
+    defaultValue: Sequelize.literal('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'),
   }
-});
+}, {
+  timestamps: true, // Ensure Sequelize auto-manages createdAt/updatedAt
+  tableName: 'users',
+}
+);
 
 // Method to find a user by email
 User.findByEmail = async (email) => {

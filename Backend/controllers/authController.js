@@ -16,7 +16,7 @@ exports.registerUser = async (req, res) => {
     
     const hashedPassword =  await bcrypt.hash(trimmedPassword, salt);
       console.log('hashed password:', hashedPassword);
-    const newUser = await User.create({ email, hashedPassword });
+    const newUser = await User.create({ email, password : hashedPassword });
     res.status(201).send({ message: 'User registered successfully', user: newUser  });
   } catch (err) {
     res.status(500).send({ message: 'Error registering user', error: err.message });
