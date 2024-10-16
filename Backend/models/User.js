@@ -19,15 +19,13 @@ const User = sequelize.define('User', {
   createdAt: {
     type: DataTypes.DATE, // Sequelize manages this automatically
     allowNull: false,
-    defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
+    defaultValue: DataTypes.NOW,
   },
   updatedAt: {
     type: DataTypes.DATE, // Automatically updated on any record update
     allowNull: false,
-    defaultValue: Sequelize.literal('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'),
-  }
-}, {
-  timestamps: true, // Ensure Sequelize auto-manages createdAt/updatedAt
+    defaultValue: DataTypes.NOW
+},   timestamps: true, // Ensure Sequelize auto-manages createdAt/updatedAt
   tableName: 'users',
 }
 );
