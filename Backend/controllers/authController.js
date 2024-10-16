@@ -5,12 +5,19 @@ const rateLimit = require('express-rate-limit');
 exports.registerUser = async (req, res) => {
   const { email, password } = req.body;
 
-  try {
-    const salt = bcrypt.genSaltSync(10);
-    const hashedPassword = bcrypt.hashSync(password, salt);
+  const trimmedPassword = password.trim();
 
-    await User.create(email, hashedPassword);
-    res.status(201).send({ message: 'User registered successfully' });
+  if (!email || !trimmedPassword) {
+    return res.status(400).send({ message: 'Email and password are required' });
+  }
+
+  try {
+    const salt = await bcrypt.genSalt(10);
+    
+    const hashedPassword =  await bcrypt.hash(trimmedPassword, salt);
+      console.log('hashed password:', hashedPassword);
+    const newUser = await User.create({ email, hashedPassword });
+    res.status(201).send({ message: 'User registered successfully', user: newUser  });
   } catch (err) {
     res.status(500).send({ message: 'Error registering user', error: err.message });
   }
@@ -26,7 +33,7 @@ exports.loginUser = async (req, res) => {
       return res.status(404).send({ message: 'User not found' });
     }
 
-    const isMatch = bcrypt.compareSync(password, user.password);
+    const isMatch = bcrypt.compare(password, user.password);
     if (!isMatch) {
       return res.status(400).send({ message: 'Invalid password' });
     }

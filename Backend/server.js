@@ -17,6 +17,7 @@ const app = express();
 require('dotenv').config();
 
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());// Parse cookies for CSRF protectio
 // CORS configuration
 app.use(cors({
@@ -66,7 +67,7 @@ db.authenticate()
   .then(() => console.log('Database connected successfully'))
   .catch((err) => console.error('Unable to connect to the database:', err));
 
-  // Global error handling middleware (Optional, for handling errors in a centralized way)
+  // Global error handling middleware (for handling errors in a centralized way)
 app.use((err, req, res, next) => {
   console.error(err.stack);
   res.status(500).send({ message: 'Something went wrong!' });
