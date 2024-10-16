@@ -1,7 +1,9 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('../config/db');
 
+
 const User = sequelize.define('User', {
+  // Define your user model attribute
   email: {
     type: DataTypes.STRING,
     allowNull: false,
@@ -15,5 +17,17 @@ const User = sequelize.define('User', {
     allowNull: false
   }
 });
+
+// Method to find a user by email
+User.findByEmail = async (email) => {
+  try {
+    return await User.findOne({ where: { email } });
+  } catch (error) {
+    throw new Error('Error finding user by email');
+  }
+};
+
+// Sync the model (optional)
+User.sync();
 
 module.exports = User;

@@ -24,6 +24,8 @@ exports.validateInput = (req, res, next) => {
   next();
 };
 
+
+
 // JWT Authentication Middleware
 exports.verifyToken = (req, res, next) => {
   const token = req.header('x-auth-token');
