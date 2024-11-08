@@ -4,10 +4,11 @@ require('dotenv').config();  // Load environment variables from .env file
 
 // Input Validation Middleware
 exports.validateInput = (req, res, next) => {
+  // get values from body
   const { email, password } = req.body;
 
   // Simple email validation
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // reg pattern for email
   if (!emailRegex.test(email)) {
     return res.status(400).send({ message: 'Invalid email format' });
   }

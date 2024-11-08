@@ -12,9 +12,10 @@ try {
     host: DB_HOST,
     dialect: DB_DIALECT
   });
-
+  // cofirmation of connection to database
   console.log('Connected to the database successfully.');
 } catch (error) {
+  //error handling if issue with connection
   console.error('Unable to connect to the database:', error.message);
 }
 
