@@ -21,8 +21,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());// Parse cookies for CSRF protectio
 // CORS configuration
 app.use(cors({
-  origin: 'http://localhost:3000', // Adjust this to match frontend domain/port
-  credentials: true // Required to allow cookies to be sent from frontend
+  origin: 'https://localhost:3000', 
+  credentials: true 
 }));
 app.use(helmet());
 

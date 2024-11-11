@@ -1,13 +1,22 @@
 import axios from 'axios';
 
-const API_URL = 'https://localhost:443/apic';
+const API_URL = 'https://localhost:443/api/auth';
 
-export const registerUser = async (email, password) => {
-  return axios.post(`${API_URL}/auth/register`, { email, password }).then(response => console.log('User signed up!', response.data))
-  .catch(error => console.error('Signup error:', error));
+export const getCsrfToken = async () => {
+  try {
+    const response = await axios.get(`${API_URL}/get-csrf-token`);
+    return response.data.csrfToken;
+  } catch (error) {
+    console.error('Error fetching CSRF token', error);
+    throw error;
+  }
 };
-
 export const loginUser = async (email, password) => {
-  return axios.post(`${API_URL}/auth/login`, { email, password }).then(response => console.log('Login Succesful', response.data))
-  .catch(error => console.error('Login error:', error));
+  try {
+    const response = await axios.post(`${API_URL}/login`, { email, password });
+    return response.data;
+  } catch (error) {
+    console.error('Error logging in', error);
+    throw error;
+  }
 };
