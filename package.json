@@ -4,7 +4,7 @@
     "bcrypt": "^5.1.1"
   },
   "scripts": {
-    "start": "webpack serve --mode development --open",
+    "start": "npm start",
     "build": "webpack --mode production",
     "lint": "eslint .",
     "test": "jest"

@@ -6,14 +6,16 @@
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
+    "csurf": "^1.10.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
+    "react-router-dom": "^6.28.0",
     "react-scripts": "5.0.1",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "webpack --config webpack.config.js",
+    "start": "set HTTPS=true&&set SSL_CRT_FILE=./ssl.cert&&set SSL_KEY_FILE=./ssl.key&&react-scripts start",
+    "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
@@ -39,6 +41,9 @@
     "@babel/preset-react": "^7.25.9"
   },
   "babel": {
-  "presets": ["@babel/preset-env", "@babel/preset-react"]
-}
+    "presets": [
+      "@babel/preset-env",
+      "@babel/preset-react"
+    ]
+  }
 }

@@ -34,6 +34,7 @@ app.use(csrfMiddleware);
 
 // Route to get CSRF token (used by frontend to fetch the token)
 app.get('/api/auth/get-csrf-token', csrfProtection, (req, res) => {
+  console.log(csrfToken);
   res.json({ csrfToken: req.csrfToken() });
 });
 

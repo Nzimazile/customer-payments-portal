@@ -13,7 +13,9 @@ export const getCsrfToken = async () => {
 };
 export const loginUser = async (email, password) => {
   try {
-    const response = await axios.post(`${API_URL}/login`, { email, password });
+    const csrfToken = await getCsrfToken();
+    console.log(csrfToken);
+    const response = await axios.post(`${API_URL}/login`, { email, password },{headers: {'CSRF-Token' : csrfToken}});
     return response.data;
   } catch (error) {
     console.error('Error logging in', error);

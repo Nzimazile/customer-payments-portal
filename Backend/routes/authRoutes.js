@@ -11,6 +11,7 @@ const csrfProtection = csrf({ cookie: true });
 router.get('/get-csrf-token', csrfProtection, (req, res) => {
     // Send the token as a JSON response so frontend can access it
     res.json({ csrfToken: req.csrfToken() });
+    console.log(csrfToken)
   });
   
 router.post('/login', authMiddleware.validateInput, authController.loginUser);
