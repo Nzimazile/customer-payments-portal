@@ -1,13 +1,16 @@
 import React from 'react';
+import './App.css';
 import LoginForm from './components/LoginForm';
-import RegisterForm from './components/RegisterForm';
+import logo from "./logo.svg";
 
 function App() {
   return (
     <div className="App">
-      <h1>Customer International Payments Portal</h1>
-      <RegisterForm />
-      <LoginForm />
+      <img src={logo} className="App-logo" alt="logo" />
+      <h1>International Payments Portal</h1>
+      <div className="LoginForm">
+        <LoginForm />
+      </div>
     </div>
   );
 }

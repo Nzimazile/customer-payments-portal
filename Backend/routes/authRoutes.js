@@ -13,9 +13,6 @@ router.get('/get-csrf-token', csrfProtection, (req, res) => {
     res.json({ csrfToken: req.csrfToken() });
   });
   
-// Register and login routes
-router.post('/register', authMiddleware.validateInput, authController.registerUser);
-
 router.post('/login', authMiddleware.validateInput, authController.loginUser);
 
 module.exports = router;

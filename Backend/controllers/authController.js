@@ -2,31 +2,6 @@ const bcrypt = require('bcrypt');
 const User = require('../models/User');
 const rateLimit = require('express-rate-limit');
 
-exports.registerUser = async (req, res) => {
-  // get values from body
-  
-  const { email, password } = req.body;
-  // trim ecxess white spaces
-  const trimmedPassword = password.trim();
-//ensure both values are present
-  if (!email || !trimmedPassword) {
-    return res.status(400).send({ message: 'Email and password are required' });
-  }
-
-  try {
-    // create salt for password
-    const salt = await bcrypt.genSalt(10);
-    // hash the password
-    const hashedPassword =  await bcrypt.hash(trimmedPassword, salt);
-    // create user in the database
-    const newUser = await User.create({ email, password : hashedPassword });
-    // message confirmation of creation
-    res.status(200).send({ message: 'User registered successfully', user: newUser  });
-  } catch (err) {
-    //error handling for issues that come from registreing user
-    res.status(500).send({ message: 'Error registering user', error: err.message });
-  }
-};
 
 exports.loginUser = async (req, res) => {
   // getting values from body
